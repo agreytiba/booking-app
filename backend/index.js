@@ -4,10 +4,15 @@ import authRoute from './routes/auth.js'
 import usersRoute from './routes/users.js'
 import roomsRoute from './routes/rooms.js'
 import hotelsRoute from './routes/hotels.js'
+import dotenv from "dotenv"
 import colors from 'colors'
+import cookieParser from "cookie-parser";
 const app = express()
 const port = 5000;
 
+
+// allow to access env file
+dotenv.config()
 
 // connect to mongoDB
 const connectDB = async() =>{
@@ -30,13 +35,18 @@ mongoose.connection.on("connected", () => {
 )
 connectDB()
 
-// middlewares
+// MIDDLEWARE FUNCTION
+
+//cookie parser
+app.use(cookieParser())
 
 // express body parser(req.body)
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+
+//  routes
 app.use("/api/auth", authRoute)
 app.use("/api/users", usersRoute)
 app.use("/api/hotels", hotelsRoute)

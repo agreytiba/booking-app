@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-const { Schema } = mongoose;
-
 const HotelSchema = new mongoose.Schema({
     
     name: {
@@ -42,7 +40,7 @@ const HotelSchema = new mongoose.Schema({
         max: 5
     },
     rooms: {
-        type: String,
+        type:[String] ,
         
     },
     CheapestPrice: {
