@@ -25,6 +25,8 @@ const connectDB = async() =>{
  }
 
 }
+
+// indicator of the connected or disconnected mongoDb 
 mongoose.connection.on("disconnected", () => {
     console.log("mongoDB disconnected".grey);
 })
