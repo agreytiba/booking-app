@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useContext,useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
+import { Link } from "react-router-dom"
+import { AiFillHome } from "react-icons/ai";
 import "./login.css"
 
 
@@ -43,7 +45,8 @@ const Login = () => {
         <button className="login-button" onClick={handleClick}>Login</button>
         {error && <span className="error">{error.message}</span>}
       </div>
-
+      <p className='para-account'>you don't have  an account <Link to="/register" style={{color:"goldenrod",textDecoration:"none"}}>register</Link></p>     
+      <Link to="/"className="btn-link"><button><AiFillHome className="backHome"/>home page</button></Link>
     </div>
   )
 }

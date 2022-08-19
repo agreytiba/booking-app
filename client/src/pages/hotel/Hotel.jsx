@@ -16,8 +16,10 @@ import { useLocation,useNavigate } from "react-router-dom";
 import Spinner from "../../components/spinner/spinner"
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
-import { abs, ceil } from "mathjs"
-i
+import { abs, ceil } from "mathjs";
+import  Reserve from '../../components/reserve/Reserve'
+import { AuthContext } from "../../context/AuthContext";
+
 
 const Hotel = () => {
 const location = useLocation()
@@ -31,7 +33,9 @@ const navigate  =useNavigate()
   const { data, loading, error } = useFetch(`/hotels/find/${id}`)
   
   // context api for date
-  const { dates,options } = useContext(SearchContext)
+  const { dates, options } = useContext(SearchContext)
+  // context api for user
+  const {user} = useContext(AuthContext)
   
  // find number of day booked for a room
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -72,6 +76,8 @@ const navigate  =useNavigate()
   }
 
   return (
+
+    
     <div>
       <Navbar />
       <Header type="list" />
@@ -148,7 +154,7 @@ const navigate  =useNavigate()
           <Footer />
         </div>
       </>}
-      {openModal && <Reserve/>}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };

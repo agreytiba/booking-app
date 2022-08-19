@@ -6,6 +6,7 @@ import {
   faPlane,
   faTaxi,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
 import { DateRange } from "react-date-range";
@@ -69,24 +70,29 @@ const Header = ({ type }) => {
       >
         <div className="headerList">
           <div className="headerListItem active">
+            <Link to="/" style={{color:"white", textDecoration:"none"}}>
             <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
+              <span>Stays</span>
+            </Link>
           </div>
+          
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faPlane} />
-            <span>Flights</span>
-          </div>
-          <div className="headerListItem">
+            <Link to="/cars" style={{color:"white", textDecoration:"none"}}>
             <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
+              <span>Car rentals</span>
+            </Link>
           </div>
           <div className="headerListItem">
+            <Link to="/tourism" style={{color:"white", textDecoration:"none"}}>
             <FontAwesomeIcon icon={faBed} />
-            <span>Attractions</span>
+              <span>Tourism Attraction</span>
+            </Link>
           </div>
           <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport taxis</span>
+            <Link to="/taxis" style={{color:"white", textDecoration:"none"}}>
+              <FontAwesomeIcon icon={faTaxi}  />
+              <span>Airport taxis</span>
+            </Link>
           </div>
         </div>
         {type !== "list" && (

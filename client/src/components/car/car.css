@@ -1,0 +1,33 @@
+ .car-container{
+ display: flex;
+ align-content: center;
+ justify-content: center;
+ }
+ .car-desc{
+    max-width: 1000px;
+ }
+.car{
+   display: grid;
+   grid-template-rows: auto;
+   grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  
+
+}
+.car div{
+  /* background-color: rgb(218, 222, 239); */
+  box-shadow:  0px 0px 3px #000;
+}
+.car section{
+    padding: 7px 10px;
+
+}
+.car section p{
+   
+    padding-block: 6px;
+}
+.car span{
+    color: goldenrod;
+    margin-right: 5px;
+    text-transform: capitalize;
+}
