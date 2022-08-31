@@ -27,7 +27,7 @@ const Login = () => {
     e.preventDefault()
     dispatch({type:"LOGIN_START"})
     try {
-      const res = await axios.post("/auth/login", credentials);
+      const res = await axios.post("http://localhost:5000/api/auth/login", credentials);
       dispatch({type:"LOGIN_SUCCESS", payload: res.data})
     } catch (err) {
       dispatch({type:"LOGIN_FAILURE" , payload:err.response.data})

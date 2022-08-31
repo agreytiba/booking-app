@@ -1,9 +1,35 @@
-import { useState } from 'react'
+import axios from "axios"
+import { useContext,useState } from "react"
+import { AuthContext } from "../../context/AuthContext"
 import { Link } from 'react-router-dom'
 import { AiFillHome } from "react-icons/ai";
 import "./register.css"
 
 function Register() {
+
+
+
+  // // useState to handle credential  from user ui
+  // const [credentials, setCredentials] = useState({
+  //   username: undefined,
+  //   password:undefined,
+  // })
+
+  // using authcontext  to fetch the user info and state
+  const {user, loading, error, dispatch } = useContext(AuthContext);
+
+  
+  // // handle submitation of  password and username
+  // const handleClick =async e => {
+  //   e.preventDefault()
+  //   dispatch({type:"LOGIN_START"})
+  //   try {
+  //     const res = await axios.post("/auth/login", credentials);
+  //     dispatch({type:"LOGIN_SUCCESS", payload: res.data})
+  //   } catch (err) {
+  //     dispatch({type:"LOGIN_FAILURE" , payload:err.response.data})
+  //   }
+  // }
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,25 +41,35 @@ function Register() {
 
   
 
-  const onChange = (e) => {
+  const onChange =  (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }))
   }
 
-  const onSubmit = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault()
 
     if (password !== password2) {
       console.log("password don't match");
-    } else {
+    }
+    
+    else {
         
-    console.log("form submitted");
+     e.preventDefault()
+    dispatch({type:"REGISTER_START"})
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/register", formData);
+      dispatch({type:"REGISTER_SUCCESS", payload: res.data})
+    } catch (err) {
+      dispatch({ type: "REGISTER_FAILURE", payload: err.response.data })
+      console.log("form submitted");
+    }
    
       }
-      setFormData({
-          name: '',
+    setFormData({
+    name: '',
     email: '',
     password: '',
     password2: '',
@@ -53,7 +89,7 @@ function Register() {
       </section>
 
       <section className='form'>
-        <form onSubmit={onSubmit}>
+        <form>
           <div className='form-group'>
             <input
               type='text'
@@ -75,7 +111,8 @@ function Register() {
               value={email}
               placeholder='Enter your email'
               onChange={onChange}
-              required
+                  required
+      
             />
           </div>
           <div className='form-group'>
@@ -103,7 +140,7 @@ function Register() {
             />
           </div>
           <div className='form-group'>
-            <button type='submit' className='btn btn-block'>
+            <button type='submit' className='btn btn-block' onClick={handleClick}>
               Submit
             </button>
           </div>
